@@ -11,38 +11,78 @@ namespace SaladilloFit.ViewModels
 {
     class UsuarioViewModel : INotifyPropertyChanged
     {
+        #region Campos
+        /// <summary>
+        /// Campo del mensaje de Bienvenida
+        /// </summary>
         public string mensaje;
+        /// <summary>
+        /// Campo del Dni del Usuario
+        /// </summary>
         public string dniUsuario;
+        /// <summary>
+        /// Campo para el Horario del usuario
+        /// </summary>
         public string horarioUsuario;
+        /// <summary>
+        /// Campo para el objetivo del Usuario
+        /// </summary>
         public string objetivoUsuario;
+        /// <summary>
+        /// Campo para la edad del Usuario
+        /// </summary>
         public int edadUsuario;
+        /// <summary>
+        /// Campo para la edad del Usuario
+        /// </summary>
         public int alturaUsuario;
+        /// <summary>
+        /// Campo para el peso del Usuario
+        /// </summary>
         public float pesoUsuario;
+        /// <summary>
+        /// Campo para el ImC del Usuario
+        /// </summary>
         private float imcUsuario;
+        /// <summary>
+        /// Campo implementado por la propiedad INotifyPropertyChanged
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-        
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Constructor de la Viewmodel
+        /// </summary>
+        /// <param name="usuario">Usuario que se loguea</param>
         public UsuarioViewModel(Usuarios usuario)
         {
             cargarDatos(usuario);
         }
+        #endregion
 
-        private async void cargarDatos(Usuarios usuario)
+        #region Propiedades
+        /// <summary>
+        /// Mensaje de bienvenida para el Usuario
+        /// </summary>
+        public string Mensaje
         {
-            List<Horarios> horarios = new List<Horarios>(await App.HorarioRepo.ObtenerTodosLosHorarios());
-            List<Objetivos> objetivos = new List<Objetivos>(await App.ObjetivoRepo.ObtenerTodosLosObjetivos());
-            string horario = horarios.Single(h => h.Id == usuario.Horario).Horario;
-            string objetivo = objetivos.Single(o => o.Id == usuario.Objetivo).Objetivo;
-
-            DniUsuario = usuario.Dni;
-            HorarioUsuario = horario;
-            ObjetivoUsuario = objetivo;
-            EdadUsuario = usuario.Edad;
-            AlturaUsuario = usuario.Altura;
-            PesoUsuario = usuario.Peso;
-            ImcUsuario = usuario.Imc;
-            
+            get
+            {
+                return mensaje;
+            }
+            set
+            {
+                if (mensaje != value)
+                {
+                    mensaje = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("Mensaje"));
+                    }
+                }
+            }
         }
-           
         /// <summary>
         /// Propiedad referente al Imc Del Usuario
         /// </summary>
@@ -148,7 +188,9 @@ namespace SaladilloFit.ViewModels
                 }
             }
         }
-
+        /// <summary>
+        /// Altura del Usuario
+        /// </summary>
         public int AlturaUsuario
         {
             get
@@ -167,7 +209,9 @@ namespace SaladilloFit.ViewModels
                 }
             }
         }
-
+        /// <summary>
+        /// Peso del usuario
+        /// </summary>
         public float PesoUsuario
         {
             get
@@ -186,12 +230,42 @@ namespace SaladilloFit.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region Metodos
+        /// <summary>
+        /// Método encargado de cargar los datos en los correspondientes Labels, para ello,
+        /// pillamos el usuario que pillamos por constructor y le asignamos los respectivos
+        /// valores a cada propiedad.
+        /// </summary>
+        /// <param name="usuario">Usuario que se conecta</param>
+        private async void cargarDatos(Usuarios usuario)
+        {
+            List<Horarios> horarios = new List<Horarios>(await App.HorarioRepo.ObtenerTodosLosHorarios());
+            List<Objetivos> objetivos = new List<Objetivos>(await App.ObjetivoRepo.ObtenerTodosLosObjetivos());
+            string horario = horarios.Single(h => h.Id == usuario.Horario).Horario;
+            string objetivo = objetivos.Single(o => o.Id == usuario.Objetivo).Objetivo;
+
+            DniUsuario = usuario.Dni;
+            HorarioUsuario = horario;
+            ObjetivoUsuario = objetivo;
+            EdadUsuario = usuario.Edad;
+            AlturaUsuario = usuario.Altura;
+            PesoUsuario = usuario.Peso;
+            ImcUsuario = usuario.Imc;
+            Mensaje = usuario.Nombre;
+
+        }
+
+
+        /// <summary>
+        /// Método para cerrar sesión y volver a la página principal
+        /// </summary>
         public void CerrarSesion()
         {
             App.Current.MainPage = new MainPage();
         }
 
-        
+        #endregion
     }
 }

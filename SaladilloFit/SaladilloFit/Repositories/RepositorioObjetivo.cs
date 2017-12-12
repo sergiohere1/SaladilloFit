@@ -10,7 +10,13 @@ namespace SaladilloFit.Repositories
 {
     public class RepositorioObjetivo
     {
+        /// <summary>
+        /// Mensaje de estado en caso de algún error.
+        /// </summary>
         public string MensajeDeEstado { get; set; }
+        /// <summary>
+        /// Conexión asíncrona a nuestra base de datos.
+        /// </summary>
         private SQLiteAsyncConnection conn;
 
         public RepositorioObjetivo(string dbPath)
@@ -18,7 +24,10 @@ namespace SaladilloFit.Repositories
             conn = new SQLiteAsyncConnection(dbPath);
             conn.CreateTableAsync<Objetivos>().Wait();
         }
-
+        /// <summary>
+        /// Método para obtener todos los objetivos de nuestra base de datos.
+        /// </summary>
+        /// <returns>Devuelve una lista con todos los objetivos.</returns>
         public async Task<List<Objetivos>> ObtenerTodosLosObjetivos()
         {
             List<Objetivos> listaObjetivos = new List<Objetivos>();

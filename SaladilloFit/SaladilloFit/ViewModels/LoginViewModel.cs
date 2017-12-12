@@ -12,11 +12,29 @@ namespace SaladilloFit.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        #region Campos
+        /// <summary>
+        /// Usuario que hemos escrito
+        /// </summary>
         public string usuario;
+        /// <summary>
+        /// Contraseña que hemos escrito
+        /// </summary>
         public string password;
+        /// <summary>
+        /// Campo para los diferentes mensajes de errores a la hora de validar
+        /// </summary>
         public string mensajeError;
+        /// <summary>
+        /// Campo implementado por la propiedad INotifyPropertyChanged
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Propiedades
+        /// <summary>
+        /// Propiedad para el nombre del Usuario
+        /// </summary>
         public string Usuario
         {
             get
@@ -36,7 +54,9 @@ namespace SaladilloFit.ViewModels
                 }
             }
         }
-
+        /// <summary>
+        /// Propiedad para la contraseña
+        /// </summary>
         public string Password
         {
             get
@@ -56,8 +76,15 @@ namespace SaladilloFit.ViewModels
                 }
             }
         }
+        #endregion
 
-       
+        #region Métodos
+        /// <summary>
+        /// Método encargado de Iniciar sesión y de validar los campos introducidos para 
+        /// ver si se ha producido algún error a la hora de insertar en los datos, si el
+        /// usuario no existe, etc.
+        /// </summary>
+        /// <param name="currentPage">Página actual para poder lanzar un DisplayAlert</param>
         public async void IniciarSesion(Page currentPage)
         {
             if (ValidarDatosInsertados())
@@ -91,7 +118,11 @@ namespace SaladilloFit.ViewModels
                 await currentPage.DisplayAlert("Error", mensajeError, "Aceptar");
             }
         }
-
+        /// <summary>
+        /// Método encargado de realizar las diferentes validaciones a los valores introducidos
+        /// para comprobar si se exceden caracteres , etc.
+        /// </summary>
+        /// <returns></returns>
         public bool ValidarDatosInsertados()
         {
             bool datosValidos = true;
@@ -124,5 +155,7 @@ namespace SaladilloFit.ViewModels
 
             return datosValidos;
         }
+
+        #endregion
     }
 }

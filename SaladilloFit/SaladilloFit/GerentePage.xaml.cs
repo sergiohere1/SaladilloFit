@@ -21,12 +21,21 @@ namespace SaladilloFit
             btnCerrarSesion.Clicked += CerrarSesion;
             btnAniadirUsuario.Clicked += AniadirUsuario;
         }
-
+        /// <summary>
+        /// Método para cerrar sesión.
+        /// </summary>
+        /// <param name="sender">Objeto que hace que se de lugar a este evento</param>
+        /// <param name="e">Argumentos del evento</param>
         private void CerrarSesion(object sender, EventArgs e)
         {
             gerenteViewModel.CerrarSesion();
         }
 
+        /// <summary>
+        /// Método para añadir un nuevo usuario a la base de datos.
+        /// </summary>
+        /// <param name="sender">Objeto que hace que se de lugar a este evento</param>
+        /// <param name="e">Argumentos del evento</param>
         private void AniadirUsuario(object sender, EventArgs e)
         {
             gerenteViewModel.CrearUsuario(this);

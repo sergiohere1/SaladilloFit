@@ -11,24 +11,64 @@ namespace SaladilloFit.ViewModels
 {
     public class GerenteViewModel : INotifyPropertyChanged
     {
+        #region Campos
+        /// <summary>
+        /// Campo referente al nombre del Usuario que vamos a crear
+        /// </summary>
         private string nombreUsuario;
+        /// <summary>
+        /// Campo referente al Dni del usuario que vamos a crear
+        /// </summary>
         private string dniUsuario;
+        /// <summary>
+        /// Campo referente al índice elegido en el picker
+        /// </summary>
         private int indiceHorario;
+        /// <summary>
+        /// Campo referente a la edad del usuario
+        /// </summary>
         private int edadUsuario;
+        /// <summary>
+        /// Campo referente a la altura del usuario
+        /// </summary>
         private int alturaUsuario;
+        /// <summary>
+        /// Campo referente al peso del usuario
+        /// </summary>
         private float pesoUsuario;
+        /// <summary>
+        /// Campo referente al índice del Objetivo
+        /// </summary>
         private int indiceObjetivo;
+        /// <summary>
+        /// Campo referente a la Lista de Usuarios de nuestra base de Datos
+        /// </summary>
         private List<Usuarios> listaUsuarios;
+        /// <summary>
+        /// Campo referente a los Horarios de nuestra base de Datos
+        /// </summary>
         private List<Horarios> listaHorarios;
+        /// <summary>
+        /// Campo referente a la lita de Objetivos de nuestra base de Datos.
+        /// </summary>
         private List<Objetivos> listaObjetivos;
+        /// <summary>
+        /// Campo referente al mensaje de Error que podrá ver el gerente.
+        /// </summary>
         private string mensajeError;
+        /// <summary>
+        /// Campo implementado por la interfaz de INotifyPropertyChanged
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Constructor
         public GerenteViewModel()
         {
             CargarDatos();
 
         }
+        #endregion
 
         #region Propiedades
         public string NombreUsuario
@@ -241,6 +281,11 @@ namespace SaladilloFit.ViewModels
             }
         #endregion
 
+        #region Métodos
+        /// <summary>
+        /// Método encargado de cargar los datos principales (Pickers, la lista de usuarios,
+        /// etc)
+        /// </summary>
         private async void CargarDatos()
         {
             ListaUsuarios = new List<Usuarios>(await App.UsuarioRepo.ObtenerTodosLosUsuarios());
@@ -249,11 +294,14 @@ namespace SaladilloFit.ViewModels
             IndiceHorario = -1;
             IndiceObjetivo = -1;
         }
-
+        /// <summary>
+        /// Método encargado de cerrar sesión
+        /// </summary>
         public void CerrarSesion()
         {
             App.Current.MainPage = new MainPage();
         }
+
         /// <summary>
         /// Método que, una vez validados los datos que haya introducido el gerente, se encargará de crear el
         /// nuevo Usuario e insertarlo en la base de Datos.
@@ -272,6 +320,11 @@ namespace SaladilloFit.ViewModels
             
         }
 
+        /// <summary>
+        /// Método encargado de validar los datos escritos por el gerente , y en caso de que alguno
+        /// fuese inválido, se impediría su creación.
+        /// </summary>
+        /// <returns></returns>
         public bool ValidarDatosEscritos()
         {
             bool datosValidados = true;
@@ -282,7 +335,8 @@ namespace SaladilloFit.ViewModels
                     string.IsNullOrEmpty(PesoUsuario.ToString()) || IndiceObjetivo == -1){
                 MensajeError = "Por favor, revise los datos";
                 datosValidados = false;
-            }else if (DniUsuario.Length != 9 || NombreUsuario.Length > 20)
+            }else if (DniUsuario.Length != 9 || NombreUsuario.Length > 20 || EdadUsuario < 0 || AlturaUsuario < 0 ||
+                PesoUsuario < 0)
             {
                 datosValidados = false;
                 MensajeError = "Por favor, revise los datos";
@@ -300,12 +354,18 @@ namespace SaladilloFit.ViewModels
             return datosValidados;
         }
 
+        /// <summary>
+        /// Método encargado de calcular el IMC
+        /// </summary>
+        /// <returns>Devuelve el valor del Imc</returns>
         public float CalcularImc()
         {
             float resultado = 0;
             resultado = (PesoUsuario/(float)(AlturaUsuario / 100)*2);
             return resultado;
         }
+
+        #endregion
 
     }
 }
