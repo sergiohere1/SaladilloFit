@@ -57,7 +57,7 @@ namespace SaladilloFit.ViewModels
         /// <param name="usuario">Usuario que se loguea</param>
         public UsuarioViewModel(Usuarios usuario)
         {
-            cargarDatos(usuario);
+            CargarDatos(usuario);
         }
         #endregion
 
@@ -239,7 +239,7 @@ namespace SaladilloFit.ViewModels
         /// valores a cada propiedad.
         /// </summary>
         /// <param name="usuario">Usuario que se conecta</param>
-        private async void cargarDatos(Usuarios usuario)
+        private async void CargarDatos(Usuarios usuario)
         {
             List<Horarios> horarios = new List<Horarios>(await App.HorarioRepo.ObtenerTodosLosHorarios());
             List<Objetivos> objetivos = new List<Objetivos>(await App.ObjetivoRepo.ObtenerTodosLosObjetivos());
