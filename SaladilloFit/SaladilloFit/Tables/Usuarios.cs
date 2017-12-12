@@ -7,8 +7,8 @@ using SQLite;
 
 namespace SaladilloFit.Tables
 {
-    [Table("Usuario")]
-    public class Usuario
+    [Table("Usuarios")]
+    public class Usuarios
     {
         [PrimaryKey, MaxLength(9)]
         public string Dni { get; set; }

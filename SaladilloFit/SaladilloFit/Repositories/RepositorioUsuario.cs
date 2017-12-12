@@ -15,16 +15,16 @@ namespace SaladilloFit.Repositories
 
         public RepositorioUsuario(string dbPath) {
             conn = new SQLiteAsyncConnection(dbPath);
-            conn.CreateTableAsync<Usuario>().Wait();
+            conn.CreateTableAsync<Usuarios>().Wait();
         }
 
-        public async Task<List<Usuario>> ObtenerTodosLosUsuarios()
+        public async Task<List<Usuarios>> ObtenerTodosLosUsuarios()
         {
-            List<Usuario> listaUsuarios = new List<Usuario>();
+            List<Usuarios> listaUsuarios = new List<Usuarios>();
 
             try
             {
-                listaUsuarios = await conn.Table<Usuario>().ToListAsync();
+                listaUsuarios = await conn.Table<Usuarios>().ToListAsync();
             }catch(Exception ex)
             {
                 MensajeDeEstado = string.Format("Error al recuperar datos, {0}", ex.ToString());
@@ -39,7 +39,7 @@ namespace SaladilloFit.Repositories
 
             try
             {
-                resultado = await conn.InsertAsync(new Usuario
+                resultado = await conn.InsertAsync(new Usuarios
                 {
                     Dni = dniUser,
                     Nombre = nombreUser,

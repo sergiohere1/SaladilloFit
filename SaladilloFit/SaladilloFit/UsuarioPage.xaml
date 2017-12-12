@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaladilloFit.UsuarioPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical">
+                <Label Text="{Binding Mensaje, StringFormat='Bienvenido: {0}'}"/>
+            </StackLayout>
+
+            <StackLayout Spacing="10" Orientation="Horizontal">
+                <Label Text="DNI"/>
+                <Label Text="Horario"/>
+                <Label Text="Objetivo"/>
+            </StackLayout>
+
+            <StackLayout Spacing="10" Orientation="Horizontal">
+                <Label Text="{Binding DniUsuario}"/>
+
+                <Label Text="{Binding HorarioUsuario}"/>
+
+                <Label Text="{Binding ObjetivoUsuario}"/>
+            </StackLayout>
+
+            <StackLayout Spacing="10" Orientation="Horizontal">
+                <Label Text="Edad"/>
+                <Label Text="Altura"/>
+                <Label Text="Peso"/>
+                <Label Text="IMC"/>
+            </StackLayout>
+
+            <StackLayout Spacing="10" Orientation="Horizontal">
+                <Label Text="{Binding EdadUsuario}"/>
+
+                <Label Text="{Binding AlturaUsuario, StringFormat='{0} cm'}"/>
+
+                <Label Text="{Binding PesoUsuario, StringFormat='{0} kg'}"/>
+
+                <Label Text="{Binding ImcUsuario}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Button x:Name="btnCerrarSesion"
+                        Text="Cambiar Usuario"
+                        HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

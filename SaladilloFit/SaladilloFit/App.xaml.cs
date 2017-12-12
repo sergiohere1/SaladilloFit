@@ -11,11 +11,15 @@ namespace SaladilloFit
     public partial class App : Application
     {
         public static RepositorioUsuario UsuarioRepo {get; set;}
+        public static RepositorioHorario HorarioRepo { get; set; }
+        public static RepositorioObjetivo ObjetivoRepo { get; set; }
 
         public App(string filename)
         {
             InitializeComponent();
             UsuarioRepo = new RepositorioUsuario(filename);
+            HorarioRepo = new RepositorioHorario(filename);
+            ObjetivoRepo = new RepositorioObjetivo(filename);
             MainPage = new SaladilloFit.MainPage();
         }
 

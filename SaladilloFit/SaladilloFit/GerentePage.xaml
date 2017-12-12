@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaladilloFit.GerentePage">
+    <ContentPage.Content>
+     
+        <StackLayout Orientation="Vertical" Padding="3">
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Usuario"/>
+
+                <Label Text="DNI"/>
+
+                <Label Text="Contraseña"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="entryUsuarioCreado"
+                       Text="{Binding NombreUsuario }"/>
+                
+                <Entry x:Name="entryDniCreado"
+                       Text="{Binding DniUsuario}"/>
+
+                <Picker x:Name="horarioSelect" SelectedIndex="{Binding IndiceHorario}"  
+                    HorizontalOptions="StartAndExpand"
+                    ItemsSource="{Binding ListaHorarios}">
+                </Picker>
+
+                <Button x:Name="btnCerrarSesion"
+                        Text="Cambiar Usuario"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Edad"/>
+                <Label Text="Altura"/>
+                <Label Text="Peso"/>
+                <Label Text="Objetivo"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="entryEdadCreada"
+                       Text="{Binding EdadUsuario}"/>
+
+                <Entry x:Name="entryAlturaCreada"
+                       Text="{Binding AlturaUsuario}"/>
+                <Label Text="cm"/>
+
+                <Entry x:Name="entryPesoCreado"
+                       Text="{Binding PesoUsuario}"/>
+                <Label Text="kg"/>
+
+                <Picker x:Name="objetivoSelect" SelectedIndex="{Binding IndiceObjetivo}"  
+                    ItemsSource="{Binding ListaObjetivos}">
+                </Picker>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Button x:Name="btnAniadirUsuario"
+                        Text="Añadir"/>
+                <Label x:Name="textoError"
+                       Text="{Binding MensajeError}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Usuarios"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <ListView x:Name="lstUsuarios"
+                      ItemsSource="{Binding ListaUsuarios}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Nombre}"/>
+                                    <Label Text="{Binding Dni}"/>
+                                    <Label Text="{Binding Horario}"/>
+                                    <Label Text="{Binding Edad}"/>
+                                    <Label Text="{Binding Altura}"/>
+                                    <Label Text="{Binding Peso}"/>
+                                    <Label Text="{Binding Imc}"/>
+                                    <Label Text="{Binding Objetivo}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
